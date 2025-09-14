@@ -144,6 +144,46 @@ $n\times p$ model matrices with $p<n$.
 $\bdA \in \R^{p\times p}$ 
 is nonsingular, 
 $C(\bdX_1) = C(\bdX_1\bdA)$.
+
+\begin{hwanswer}
+	\textbf{Solution: } Nonsingular means $\bdA$ has an inverse, $\bdA^{-1}$, which also means that: 
+\be
+	\item Its determinant is nonzero
+	\item It is full rank 
+	\item The only solution to $\bdA \bm x = \bm 0$ is $\bm 0$
+\ee
+
+We want to show that $C(\bdX_1) = C(\bdX_1 \bdA)$. This is a fairly intuitive result, as with these properties, $\bdA$ can't transform $\bdX_1$ into something that you can't go back from, but we need to actually show it. To show this equality, we can take an arbitrary vector from first $C(\bdX_1)$ and show it is in $C(\bdX_1\bdA)$, and vice versa. 
+
+First, let us tackle the $C(\bdX_1\bdA)\rightarrow C(\bdX_1)$ direction, as it is simpler. 
+
+Let $\bdy_1 \in C(\bdX_1 \bdA) \iff \bdy_1 = (\bdX_1 \bdA) \bdc_1, \exists \bdc_1 \in \mathbb R^p$, i.e some linear combination of the columns of $\bdX_1\bdA$. Similarly, if a vector $\bm k$ is inside the column space of $\bdX$, it needs to be able to be written as such: 
+\begin{align*}
+	\exists \bm \ell \in \mathbb R^p : \bm k= \bdX \bm \ell \rightarrow \bm k \in C(\bdX_1)
+\end{align*}
+This actually is wonderful, because now, we can use the simple fact that $\bdA \bdc_1$ is a vector as well to say that any vector in $C(\bdX_1\bdA)$ is also in $C(\bdX)$! So, this direction is solved. 
+
+Now, let us tackle the $C(\bdX_1) \rightarrow C(\bdX_1\bdA)$ direction.
+
+This is where we will utilize the fact that $\bdA^{-1}$ exists. Let's start fresh with the goal for this second part. We'll take an arbitrary vector from $C(\bdX_1)$ and show it must be in $C(\bdX_1\bdA)$.
+Let $\bm k$ be any vector in $C(\bdX_1)$. We can write it as:
+\begin{align*}
+	\bm k = \bdX_1 \bm \ell, \bm \ell \in \R^p
+\end{align*}
+
+Our goal is to manipulate this equation until it looks like $\bm k = (\bdX_1\bdA) \bdu$ for some $\bdu$. 
+
+We know that $\bdA^{-1}\bdA=\bdI$, so let us use that. Say: 
+\begin{align*}
+	\bm \ell = \bdI \bm \ell = \bdA^{-1}\bdA \bm \ell = \bdA \bdA^{-1}\bm \ell
+\end{align*}
+Inserting this in: 
+\begin{align*}
+	\bm k = (\bdX_1 \bdA) \bdA^{-1} \bm \ell 
+\end{align*}
+Where I put the parentheses for emphasis. We have shown that $\bdu = \bdA^{-1} \bm \ell$, and that all vectors in $C(\bdX_1\bdA)$ exist in $C(\bdX)$ and vice versa. Wonderful!
+\end{hwanswer}
+
 \item Now suppose that $C(\bdX_1) = C(\bdX_2)$.
 This part of the problem involves
 showing that this implies the existence of a nonsingular matrix
@@ -161,6 +201,14 @@ and $\bda_j \in \R^p$ is the $j$-th column of $\bdA$.
 Show that each
 $\bdx_{1j}$ can be written as 
 $\bdx_{1j} = \bdX_2 \bda_j$, and hence $\bdX_1 = \bdX_2\bdA$.
+
+\begin{hwanswer}
+	\textbf{Solution: } Remember that $\bdX_1$ and $\bdX_2$ are both $n \times p$ matrices, and $\bdA$ is a $p \times p$ matrix. We want to show that column of $\bdX_1$ can be written as a linear combination of the columns of $\bdX_2$, where the coefficients are in $\bdA$. Since we have assumed that $C(\bdX_1)=C(\bdX_2)$ for this portion, this isn't too complicated. By the definition of a column space, $\bdx_{1k}$ belongs to $C(\bdX_1)$. This means it belongs to $C(\bdX_2)$ as well. And if it belongs to $C(\bdX_2)$, then by definition, it can be written as $\bdx_{1k} = \bdX_2 \bda_j$, where $\bda_j$ is some vector. If we do this for all columns in $\bdX_1$, we show that 
+\begin{align*}
+	\bdX_1 = \bdX_2 \bdA
+\end{align*}
+\end{hwanswer}
+
 \item With the result from part~(i), 
 show that $\bdA$ must be invertible.
 Prove this by contradiction:
@@ -169,6 +217,28 @@ singular, so there exists a nonzero vector $\bdv \in \R^p$
 such that $\bdA\bdv = \bdzero$.
 Proceed by showing that this contradicts the assumption that $\bdX_1$
 has full column rank.
+
+\begin{hwanswer}
+	\textbf{Solution: } We follow the path laid down in the question statement for this part. Assume $\bdA$ is singular, thus $\exists \bm v \in \mathbb R^p$ that is nonzero such that $\bdA \bm v= \bm 0$. In the first part, we have shown that $\bdX_1 = \bdX_2 \bdA$. We also know that if $\bdX_1$ has full column rank like we have assumed in the question, then we need to have:
+\begin{align*}
+	\forall \bdc \in \mathbb R^p - \bm 0, \bm k =  \bdX_1 \bdc, \bm k \neq \bm 0
+\end{align*}
+i.e
+The equation $\bdX_1\bdc = \bm 0$ is only true if $\bdc = \bm 0$.
+However, if we substitute $\bdX_1 = \bdX_2 \bdA$:
+\begin{align*}
+	\forall \bdc \in \mathbb R^p - \bm 0, \bm k = \bdX_2 \bdA \bdc, \bm k \neq 0
+\end{align*}
+
+However, we explicitly assumed in the beginning that this couldn't happen, that there exists nonzero $\bm v \in \mathbb R^p$ such that $\bm k$ would be zero:
+
+\begin{align*}
+	\bm k = \bdX_2 \bdA \bm v = \bm 0, \wedge \bm k \neq 0
+\end{align*}
+
+ As such, that initial assumption is false, there doesn't exist a vector like that, and $\bdA$ is invertible. 
+\end{hwanswer}
+
 \ee
 \ee
 
@@ -190,6 +260,9 @@ $(\beta_0, \beta_1,\ldots, \beta_r, \gamma_1,\ldots,\gamma_c)$.
 Why or why not?
 It might help to code the model for $\E(y_{ijk})$ into a model matrix 
 that multiplies the parameter vector stated above.
+
+\textbf{Solution: }
+
 \item Give an example of a quantity that is a function of
 the model parameters,
 $\beta_0, \beta_1,\ldots, \beta_r, \gamma_1,\ldots,\gamma_c$,
@@ -244,8 +317,7 @@ where, in general, for $V_1, V_2 \subseteq \R^n$,
 \[
 V_1 + V_2 = \{v_1 + v_2 : v_1\in V_1, v_2\in V_2\}.
 \]
-You may assume below (without proof) that 
-for any subspace $A \subseteq \R^n$, $(A^\perp)^\perp = A$.
+
 \be
 \item 
 We first need to prove three lemmas.
