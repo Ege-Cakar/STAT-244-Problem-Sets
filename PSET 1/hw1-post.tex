@@ -1,0 +1,295 @@
+\input{header-notes}
+\pagestyle{empty}
+\usepackage{tcolorbox}
+\newtcolorbox{hwanswer}{
+    colback=gray!15,          % Light gray background
+    colframe=gray!50,         % Slightly darker gray border
+    arc=6pt,                  % Rounded corners (6pt radius)
+    boxrule=1pt,              % Border thickness
+    left=8pt,                 % Left padding
+    right=8pt,                % Right padding
+    top=8pt,                  % Top padding
+    bottom=8pt,               % Bottom padding
+    breakable,                % Allow box to break across pages
+    enhanced                  % Enable advanced features
+}
+\usepackage{mathrsfs}
+\usepackage{bm}
+
+\begin{document}
+
+\begin{center}
+{\large\bf Statistics 244 --- Fall 2025 --- Assignment 1}\\
+Due
+Friday, 
+September 19, 2025
+\end{center}
+
+Homework is to be 
+uploaded to Gradescope by 10:00pm on Friday evening.
+
+\underline{Readings}:
+
+``Introductory lecture''  and
+``Linear algebra issues in linear models'' 
+course notes.
+
+Agresti:  Chapter 1 
+
+\underline{Written assignment}
+
+\begin{enumerate}
+\item Suppose $\bdX$ is an $n\times p$ model matrix.
+Show that
+$\{\bdX\bdbeta | \bdbeta \in \R^p \}$ 
+is a vector space.
+
+\begin{hwanswer}
+\textbf{Solution:}
+	Let $V = \{\bdX\bdbeta | \bdbeta \in \R^p \}$.  We simply need to show that that set of vectors is closed under linear combination, i.e a) $\bm{u}+\bm v \in V$ and $c \bm u \in V$. Since we are looking for $\beta \in \mathbb{R}^p$, we are simply talking about any arbitrary linear combination of the columns of $\bdX$. Let us first prove the first property: 
+	\be
+	\item if $\bm u \in V$ and $\bm v \in V$, $\bm u + \bm v \in V$. By the definition of $V$, $\exists \beta_1, \beta_2$ such that $\bdX \beta_1 = \bm u$ and $\bdX \beta_2 = \bm v$. In that case, we can rewrite their sum as $\bdX (\beta_1 + \beta_2)$. By the definition of $\beta$, as $\beta_1 + \beta_2 \in \mathbb R^p$, $\bm u + \bm v \in V$.
+	\item if $\bm u \in V$, then $c \bm u \in V$. This is even simpler to show. By definition of $V$, $\exists \beta_3$ such that $\bdX \beta_3=\bm u$. Then, $c \bm u = c \bdX \beta_3 = \bdX c\beta_3$, and as $c$ is a real scalar, $c \beta_3 \in \mathbb R^p$.
+	\ee 
+	Thus, $\{\bdX\bdbeta | \bdbeta \in \R^p \}$ is a vector space. 	
+\end{hwanswer}
+
+
+\item 
+\be
+\item For $n\times p$ model matrix $\bdX$, show that the null space of
+$\bdX$, $N(\bdX)$, is the orthogonal complement of the column space of
+$\bdX\trans$, that is, $C(\bdX\trans)^\perp$. 
+\begin{hwanswer}
+	\textbf{Solution:} The definition of orthogonal complement is 
+\begin{align*}
+	\forall \bm u \in W, \forall \bm v \in W^\bot \subseteq \mathbb{R}^n \iff \bm u^\top \bm v = 0
+\end{align*}
+Here, if the equation on the right is satisfied, then $W^\bot$ is the orthogonal complement of $W$, and vice versa.
+
+As for null space, it is defined as
+\begin{align*}
+	N(\bdX)=\{\bm \zeta : \bdX \bm \zeta = \bm 0\}
+\end{align*}
+This means that the null space of $\bdX$ is simply the set of vectors for which $\bm \zeta$ is orthogonal to all rows in $\bdX$, as their multiplication should produce the $\bm 0$, i.e the zero vector. 
+
+Let $\bm k^\top$ and $\bm \ell^\top$ be two rows from $\bdX$. We want to show being orthogonal to each separately, i.e $\bm k^\top \bm \zeta =\bm 0$ and $\bm \ell^\top \bm \zeta =\bm 0$, means being orthogonal to any arbitrary linear combination too. This follows trivially: 
+
+\begin{align*}
+	(c \bm k^\top+p\bm \ell^\top)\bm \zeta = c\bm k^\top \bm \zeta + p \bm \ell ^\top \bm \zeta = c \cdot 0 + p \cdot 0 = 0
+\end{align*}
+
+Then, it can be said that $N(\bdX)$ is orthogonal to all linear combinations of the rows of $\bdX$. As the column space of $\bdX^\top$ is simply the vector space created by the span of the columns of $\bdX^\top$, and the span of the columns of $\bdX^\top$ is equivalent to the span of the rows of $\bdX$, $N(\bdX) = C(X^\top)^\bot$.
+\end{hwanswer}
+\item Let $\bdX =
+\left( \begin{array}{rl} 1 & 0 \\ 1 & 1 \\ 0 & 1 \end{array} \right)$,
+and let $V = C(\bdX)$ be the vector space spanned by the columns of
+$\bdX$.
+Determine the orthogonal complement $V^\perp$ of $V$ as a closed-form
+expression.
+Use the result of part (a) as a guide.\\
+\begin{hwanswer}
+	\textbf{Solution:} We saw in part (a) that the null space of $\bdX$ is equivalent to the orthogonal complement of $C(X^\top)$. Here, we want to look at it from the other way. The orthogonal complement $V^\bot$ of $V$ can be written as the null space of the transpose of the model matrix that creates it, i.e 
+\begin{align*}
+	V^\bot = N(\bm X^\top)
+\end{align*}
+Considering the simplicity of $\bdX$, this is fairly simple: 
+\begin{align*}
+	N(\bdX^\top) = \{\bm \zeta : \bdX^\top \bm \zeta = \bm 0\} = \{\bm \zeta : \bm \zeta = c (-1,1,-1)^\top \forall c \in \mathbb R\} = \text{span}((-1,1,-1)^\top)
+\end{align*}
+\end{hwanswer}
+\ee
+
+\item 
+A model $M$ has model matrix $\bdX$. 
+A simpler model $M_0$ results from removing the final term in $M$, 
+and hence has model matrix $\bdX_0$ that deletes the final column from
+$\bdX$. 
+From the definition of a column space, explain why 
+$C(\bdX_0) \subseteq C(\bdX)$.
+
+\begin{hwanswer}
+	\textbf{Solution:} Looking back at the definition of column space, we see 
+
+\begin{align*}
+	C(\bdX) = \{\bm \eta : \bm \eta = \bdX \beta, \forall \beta \in \mathbb R^p\} \subseteq \mathbb R^n
+\end{align*}
+
+We want to show that $C(\bdX_0)$ is either a subset of or equal to $C(\bdX)$. An important detail here to notice is that the model matrix $\bdX$ isn't said to be full-rank, which is where the possibility of $\bdX_0$ and $\bdX$ having the same column space comes from. Here, we have two options: 
+a) Either a linearly independent vector was removed, in which case $\bdX_0$ is a subset, or b) a dependent vector was removed, in which case $\bdX_0$ is the same as $\bdX$. If we prove these two statements, then we will have proven the statement in the question. However, another way to approach this which is agnostic of whether $\bm x_p$ was linearly independent or not is showing that if something is a member of $C(\bdX_0)$, then it also has to be a member of $C(\bdX)$. First, we can rewrite the definition of the column space as such: 
+
+\begin{align*}
+	C(\bdX) = \{\bm \eta : \bm \eta = \bm x_1 \beta_1 + \bm x_2 \beta_2 + \dots + \bm x_p \beta_p, \forall \beta_i \in \mathbb R\} \subseteq \mathbb R^n
+\end{align*}
+
+Then, the column space of $\bdX_0$ is defined as:
+
+\begin{align*}
+	C(\bdX_0) = \{\bm \eta : \bm \eta = \bm x_1 \beta_1 + \bm x_2 \beta_2 + \dots + \bm x_{p-1} \beta_{p-1}, \forall \beta_i \in \mathbb R\} \subseteq \mathbb R^n
+\end{align*}
+
+It is fairly evident from this example that 
+\begin{align*}
+	C(\bdX_0) \subseteq C(\bdX)
+\end{align*}
+
+as when $\beta_p$ is zero, the set of vectors that can be expressed by both become equal, but $C(\bdX)$ is strictly larger when $\beta_p$ isn't zero. 
+
+\end{hwanswer}
+\item 
+Suppose that $\bdX_1$ and $\bdX_2$ are full-rank 
+$n\times p$ model matrices with $p<n$.
+\be
+\item Show that if 
+$\bdA \in \R^{p\times p}$ 
+is nonsingular, 
+$C(\bdX_1) = C(\bdX_1\bdA)$.
+\item Now suppose that $C(\bdX_1) = C(\bdX_2)$.
+This part of the problem involves
+showing that this implies the existence of a nonsingular matrix
+$\bdA \in \R^{p\times p}$ 
+such that $\bdX_1 = \bdX_2 \bdA$.
+\be
+\item To establish the existence of $\bdA$, let 
+\[
+\bdX_1 = [\bdx_{11} \mid \bdx_{12} \mid \cdots \mid \bdx_{1p}],
+\hspace{0.5in}
+\bdA = [\bda_1 \mid \cdots \mid \bda_p],
+\]
+where $\bdx_{1j}$ is the $j$-th column of $\bdX_1$,
+and $\bda_j \in \R^p$ is the $j$-th column of $\bdA$.
+Show that each
+$\bdx_{1j}$ can be written as 
+$\bdx_{1j} = \bdX_2 \bda_j$, and hence $\bdX_1 = \bdX_2\bdA$.
+\item With the result from part~(i), 
+show that $\bdA$ must be invertible.
+Prove this by contradiction:
+assume that $\bdA$ is
+singular, so there exists a nonzero vector $\bdv \in \R^p$ 
+such that $\bdA\bdv = \bdzero$.
+Proceed by showing that this contradicts the assumption that $\bdX_1$
+has full column rank.
+\ee
+\ee
+
+\item 
+Consider the model for the \textit{two-way layout} for 
+categorical variables
+$A$ and $B$:
+\[
+\E(y_{ijk}) = \beta_0 + \beta_i + \gamma_j, \hspace{0.1 in}
+\text{where } i = 1, \dots, r; \hspace{0.1 in} j = 1, \dots,
+c;\hspace{0.1 in} \text{ and } k = 1, \dots, n.
+\]
+This model is \textit{balanced}, having an equal sample size $n$ in each 
+of the $rc$ cells. 
+We might be interested in estimating the parameter vector
+$(\beta_0, \beta_1,\ldots, \beta_r, \gamma_1,\ldots,\gamma_c)$.
+\be
+\item For the model as stated, is the parameter vector identifiable? 
+Why or why not?
+It might help to code the model for $\E(y_{ijk})$ into a model matrix 
+that multiplies the parameter vector stated above.
+\item Give an example of a quantity that is a function of
+the model parameters,
+$\beta_0, \beta_1,\ldots, \beta_r, \gamma_1,\ldots,\gamma_c$,
+that is (i) not estimable, and (ii) estimable. 
+In each case, provide a rigorous justification.
+\ee
+
+\item 
+Suppose $\bdy \in \R^n$, and $\E(\bdy) = \bdX\bdbeta$ for
+$n\times p$ model matrix $\bdX$ and $\bdbeta \in \R^p$.
+This question concerns proving
+that $\bdell\trans\bdbeta$ is estimable if and only if
+\[
+\bdell\trans = \bdell\trans (\bdX\trans\bdX)^{-}(\bdX\trans\bdX) 
+\]
+for selected $\bdell \in \R^p$.
+\be
+\item 
+Prove that if $\bdell\trans\bdbeta$ is estimable, then
+for any g-inverse 
+$(\bdX\trans\bdX)^{-}$
+of $\bdX\trans\bdX$,
+\[
+\bdell\trans = \bdell\trans (\bdX\trans\bdX)^{-}(\bdX\trans\bdX) 
+\]
+for selected $\bdell \in \R^p$.
+
+\item
+Prove that if 
+\[
+\bdell\trans = \bdell\trans (\bdX\trans\bdX)^{-}(\bdX\trans\bdX) 
+\]
+for selected $\bdell \in \R^p$ and for some g-inverse
+$(\bdX\trans\bdX)^{-}$
+of $\bdX\trans\bdX$, then
+$\bdell\trans\bdbeta$ is estimable.
+
+\item
+For full-rank $\bdX$, what do the previous results imply about the choice
+of $\bdell \in \R^p$ for $\bdell\trans\bdbeta$ to be estimable?
+\ee
+
+\item 
+Suppose $\bdW_1$ and $\bdW_2$ are two arbitrary subspaces of $\R^n$.
+The goal of this problem is to prove
+\[
+(\bdW_1 \cap \bdW_2)^\perp
+=
+\bdW_1^\perp + \bdW_2^\perp,
+\]
+where, in general, for $V_1, V_2 \subseteq \R^n$,
+\[
+V_1 + V_2 = \{v_1 + v_2 : v_1\in V_1, v_2\in V_2\}.
+\]
+You may assume below (without proof) that 
+for any subspace $A \subseteq \R^n$, $(A^\perp)^\perp = A$.
+\be
+\item 
+We first need to prove three lemmas.
+\be
+\item 
+Prove that,
+for any subspace $A \subseteq \R^n$, $(A^\perp)^\perp = A$.
+\item 
+Show that, for any $A \subseteq \R^n$, $\bdzero \in A^\perp$.
+\item 
+Let $A,B \subseteq \R^n$.
+Prove that $A\subseteq B$ if and only if 
+$B^\perp \subseteq A^\perp$.
+\ee
+\item 
+To prove the main result of the problem, we first want to show that 
+\[
+(\bdW_1 \cap \bdW_2)^\perp
+\subseteq
+\bdW_1^\perp + \bdW_2^\perp.
+\]
+\be
+\item 
+Show that $\bdW_i^\perp \subseteq \bdW_1^\perp + \bdW_2^\perp$ for $i=1,2$.
+\item 
+Show that the above implies 
+\[
+(\bdW_1^\perp + \bdW_2^\perp)^\perp \subseteq (\bdW_1 \cap\bdW_2),
+\]
+and therefore $(\bdW_1 \cap \bdW_2)^\perp
+\subseteq
+\bdW_1^\perp + \bdW_2^\perp$.
+\ee
+\item 
+Now show the converse of part~(b), namely that
+\[
+\bdW_1^\perp + \bdW_2^\perp
+\subseteq
+(\bdW_1 \cap \bdW_2)^\perp.
+\]
+{\em Hint:  Choose
+$v_1 \in \bdW_1^\perp$ and $v_2 \in \bdW_2^\perp$,
+and proceed from there.}
+\ee
+
+\end{enumerate}
+\end{document}

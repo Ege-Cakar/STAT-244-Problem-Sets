@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+\usepackage[dvips]{color}
+\usepackage{epsf}
+\usepackage{graphicx}
+% \usepackage{graphics}
+\usepackage{palatino}
+\usepackage{amsmath,amssymb}
+\parindent=0pt
+\parskip=11pt
+% \pagestyle{empty}
+\setlength{\jot}{4pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{9.0in}
+\setlength{\evensidemargin}{0.0in}
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\topmargin}{-.5in}
+\newcommand{\newc}{\newcommand}
+\newc{\bc}{\begin{center}}
+\newc{\ec}{\end{center}}
+\newc{\be}{\begin{enumerate}}
+\newc{\ee}{\end{enumerate}}
+\newc{\bi}{\begin{itemize}}
+\newc{\ei}{\end{itemize}}
+\newc{\bd}{\begin{description}}
+\newc{\ed}{\end{description}}
+\newc{\und}[1]{\underline{#1}}
+\newc{\E}{\mbox{E}}
+\newc{\V}{\mbox{V}}
+\newc{\N}{\mbox{N}}
+\newc{\B}{\mbox{Bin}}
+\newc{\Bern}{\mbox{Bern}}
+\newc{\Po}{\mbox{Po}}
+\newc{\IG}{\mbox{IG}}
+\newc{\Gam}{\mbox{Gam}}
+% \newc{\bdP}{\mbox{P}}
+\newc{\bdp}{\mathsf{p}}
+\newc{\odds}{\mbox{odds}}
+\newc{\OR}{\mbox{OR}}
+\newc{\stderr}{\mbox{s.e.}}
+\newc{\logit}{\mbox{logit}}
+\newc{\sign}{\mbox{sign}}
+\newc{\SD}{\mbox{SD}}
+\newc{\bdmu}{\mbox{\boldmath $\mu$}}
+\newc{\bdSigma}{\mbox{\boldmath $\Sigma$}}
+\newc{\bdLambda}{\mbox{\boldmath $\Lambda$}}
+\newc{\bdmuhat}{\mbox{\boldmath $\hat{\mu}$}}
+\newc{\bdeta}{\mbox{\boldmath $\eta$}}
+\newc{\bdtheta}{\mbox{\boldmath $\theta$}}
+\newc{\bdbeta}{\mbox{\boldmath $\beta$}}
+\newc{\bdgamma}{\mbox{\boldmath $\gamma$}}
+\newc{\bdbetahat}{\mbox{\boldmath $\hat{\beta}$}}
+\newc{\bdgammahat}{\mbox{\boldmath $\hat{\gamma}$}}
+\newc{\bdthetahat}{\mbox{\boldmath $\hat{\theta}$}}
+\newc{\bdvareps}{\mbox{\boldmath $\varepsilon$}}
+\newc{\bdzero}{\mbox{\boldmath $0$}}
+\newc{\bdone}{\mbox{\boldmath $1$}}
+\newc{\bdnu}{\mbox{\boldmath $\nu$}}
+\newc{\bdell}{\mbox{\boldmath $\ell$}}
+\newc{\bdxi}{\mbox{\boldmath $\xi$}}
+\newc{\bdomega}{\mbox{\boldmath $\omega$}}
+\newc{\bdepsilon}{\mbox{\boldmath $\varepsilon$}}
+\newc{\bdI}{\mathbf{I}}
+\newc{\bdP}{\mbox{\boldmath $P$}}
+\newc{\bdX}{\mbox{\boldmath $X$}}
+\newc{\bdA}{\mbox{\boldmath $A$}}
+\newc{\bdB}{\mbox{\boldmath $B$}}
+\newc{\bdC}{\mbox{\boldmath $C$}}
+\newc{\bdD}{\mbox{\boldmath $D$}}
+\newc{\bdG}{\mbox{\boldmath $G$}}
+\newc{\bdJ}{\mbox{\boldmath $J$}}
+\newc{\bdK}{\mbox{\boldmath $K$}}
+\newc{\bda}{\mbox{\boldmath $a$}}
+\newc{\bdb}{\mbox{\boldmath $b$}}
+\newc{\bdc}{\mbox{\boldmath $c$}}
+\newc{\bde}{\mbox{\boldmath $e$}}
+\newc{\bdu}{\mbox{\boldmath $u$}}
+\newc{\bdv}{\mbox{\boldmath $v$}}
+\newc{\bdx}{\mbox{\boldmath $x$}}
+\newc{\bdy}{\mbox{\boldmath $y$}}
+\newc{\bdz}{\mbox{\boldmath $z$}}
+\newc{\bdr}{\mbox{\boldmath $r$}}
+\newc{\bdQ}{\mbox{\boldmath $Q$}}
+\newc{\bdR}{\mbox{\boldmath $R$}}
+\newc{\bdY}{\mbox{\boldmath $Y$}}
+\newc{\bdT}{\mbox{\boldmath $T$}}
+\newc{\bdW}{\mbox{\boldmath $W$}}
+\newc{\bdH}{\mbox{\boldmath $H$}}
+\newc{\bdL}{\mbox{\boldmath $L$}}
+\newc{\bdU}{\mbox{\boldmath $U$}}
+\newc{\bdV}{\mbox{\boldmath $V$}}
+\newc{\Multinom}{\mbox{Multinom}}
+\newc{\Var}{\mbox{Var}}
+\newc{\var}{\mbox{var}}
+\newc{\diag}{\mbox{diag}}
+\newc{\tr}{\mbox{tr}}
+\newc{\phat}{\hat{p}}
+\newc{\Xbar}{\bar{X}}
+\newc{\xbar}{\bar{x}}
+\newc{\Ybar}{\bar{Y}}
+\newc{\ybar}{\bar{y}}
+\newc{\dbar}{\bar{d}}
+\newc{\yhat}{\hat{y}}
+\newc{\bdyhat}{\mbox{\boldmath $\hat{y}$}}
+\newc{\ytil}{\tilde{y}}
+\newc{\ftil}{\tilde{f}}
+\newc{\Ho}{\mbox{\bf H}_o}
+\newc{\Ha}{\mbox{\bf H}_a}
+\newc{\phatYX}{\phat_Y - \phat_X}
+\newc{\SSG}{\mbox{SSG}}
+\newc{\SSB}{\mbox{SSB}}
+\newc{\SSE}{\mbox{SSE}}
+\newc{\SST}{\mbox{SST}}
+\newc{\SSR}{\mbox{SSR}}
+\newc{\SSAB}{\mbox{SSAB}}
+\newc{\MSG}{\mbox{MSG}}
+\newc{\MSB}{\mbox{MSB}}
+\newc{\MSE}{\mbox{MSE}}
+\newc{\MST}{\mbox{MST}}
+\newc{\MSAB}{\mbox{MSAB}}
+\newc{\dfE}{\mbox{dfE}}
+\newc{\dfG}{\mbox{dfG}}
+\newc{\dfB}{\mbox{dfB}}
+\newc{\dfT}{\mbox{dfT}}
+\newc{\dfAB}{\mbox{dfAB}}
+\newc{\muhat}{\hat{\mu}}
+\newc{\betahat}{\hat{\beta}}
+\newc{\alphahat}{\hat{\alpha}}
+\newc{\etahat}{\hat{\eta}}
+\newc{\phihat}{\hat{\phi}}
+\newc{\sigmahat}{\hat{\sigma}}
+\newc{\cl}{\centerline}
+\newc{\redtitle}[1]{ {\color{red}\und{#1}:} }
+\newc{\bluetitle}[1]{ {\color{blue}\und{#1}:} }
+\newc{\magentatitle}[1]{ {\color{magenta}\und{#1}:} }
+\newc{\R}{\mathbb{R}}
+\newc{\trans}{^\mathsf{T}}
+\newc{\xtx}{\bdX\trans\bdX}
+\newc{\xxtxx}{\bdX(\xtx)^{-1}\bdX\trans}
+\newc{\argmin}{\operatornamewithlimits{argmin}}
+\newc{\argmax}{\operatornamewithlimits{argmax}}
+\newc{\bs}{}
+\newc{\es}{}
+\newc{\sm}{}
+\newc{\tny}{\small}
+\newc{\bpage}{\eject}
+\newc{\incg}[1]{
+\vspace*{0.2in}
+\includegraphics[scale=0.55,angle=270]{#1}
+}
+% \flushbottom
